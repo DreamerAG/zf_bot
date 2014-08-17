@@ -1602,7 +1602,7 @@ class GameDiggerGraveWithBrains(GameType):
         self.gainDone = gainDone
         self.gainTime = gainTime
         self.id = id
-        self.item = '@SC_FISHER_GRAVE_BRAINER'
+        self.item = '@SC_DIGGER_GRAVE_BRAINER'
         self.materials = materials
         self.started = started
         self.type = 'diggerGraveWithBrains'
@@ -2202,10 +2202,10 @@ class GameCookStart(GameAction):
         self.objId = objId
         self.type = 'item'
 
-class GameCookStop(GameAction): 
+class GameCookStop(GameAction):
     #{"objId":803,"action":"stop","type":"item"}
     type = 'item'
-    
+
     def __init__(self, objId=None):  # @ReservedAssignment
         assert (objId is None
                 or isinstance(objId, long))
@@ -2235,7 +2235,7 @@ class GameBuyItem(GameAction):
         self.type = 'item'
         self.x = x
         self.y = y
-        
+
 class GameUseStorageItem(GameAction):
     type = 'item'
     def __init__(self,  # @ReservedAssignment
@@ -2254,11 +2254,11 @@ class GameUseStorageItem(GameAction):
         self.type = 'item'
         self.x = x
         self.y = y
-        
+
 class GameSellItem(GameAction):
     type = 'item'
 
-    def __init__(self, 
+    def __init__(self,
                 count=None,
                 itemId=None ): #,  # @ReservedAssignment
         assert (count is None
@@ -2316,7 +2316,7 @@ class GameSendGift(GameAction):
 
 class GameFertilizeTree(GameAction):
     type = 'item'
-    
+
     def __init__(self, itemId=None, objId=None):  # @ReservedAssignment   , ItemId=None
         assert (objId is None
                 or isinstance(objId, long))
