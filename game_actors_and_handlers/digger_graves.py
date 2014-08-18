@@ -11,7 +11,7 @@ class BagsPicker(ResourcePicker):
 
     def get_worker_types(self):
         return [GameDiggerGrave.type, GameDiggerGraveWithBrains.type]
-    
+
     def perform_action(self):
         graves = self._get_game_location().get_all_objects_by_types(self.get_worker_types())
         for grave in graves:
@@ -21,9 +21,9 @@ class BagsPicker(ResourcePicker):
 
                 # Получаем его название
                 grave_name = self._get_item_reader().get(grave.item).name
-                
+
                 # Выполняем запрос на сервер
-                logger.info(u'Выгоняем работать %s %i' % (grave_name, grave.id))
+                logger.info(u'Кладоискатель: выгоняем работать %s %i' % (grave_name, grave.id))
                 grave_start_event = {u'type': u'item', u'action': u'start', u'objId': grave.id}
                 self._get_events_sender().send_game_events([grave_start_event])
 
@@ -31,12 +31,12 @@ class BagsPicker(ResourcePicker):
                 grave.started = True
 
             # Если есть мешки у рыбака
-            if grave.materials == 3:
-                logger.info("Собираем мешки " + str(grave.materials) + ' шт.')
+            if grave.materials >= 1:
+                logger.info("Кладоискатель: собираем мешки " + str(grave.materials) + ' шт.')
                 for _ in range(grave.materials):
                     self._pick_material(grave, None)
-                    grave.materials -= 1
-                
+                    grave.materials -= 0
+
 
 class TimeGainEventHandler(object):
 
@@ -63,7 +63,7 @@ class TimeGainEventHandler(object):
                     gameObject.gainTime = None
             if event_to_handle.action == 'start':
                 gameObject.started = True
-		if hasattr(event_to_handle,'gainTime'):	
+		if hasattr(event_to_handle,'gainTime'):
 				gameObject.gainTime = event_to_handle.gainTime
 				logger.info(worker + u' принесёт через ' + str((int(gameObject.gainTime) - self._get_timer()._get_current_client_time())/1000/60) + u' мин.')
             else:
