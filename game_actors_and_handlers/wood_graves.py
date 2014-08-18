@@ -24,6 +24,5 @@ class WoodTargetSelecter(TargetSelecter):
 class WoodPicker(ResourcePicker):
 
     def get_worker_types(self):
-        logger.info(u'!!!WoodPicker Старт...')
         return [GameWoodGrave.type, GameWoodGraveDouble.type]
 

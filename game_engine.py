@@ -20,14 +20,14 @@ from game_actors_and_handlers.wood_graves import WoodPicker, WoodTargetSelecter
 from game_actors_and_handlers.cook_graves import BrewPicker, CookerBot, RecipeReader, CookSpeed
 from game_actors_and_handlers.digger_graves import BagsPicker, TimeGainEventHandler
 from game_actors_and_handlers.stone_graves import StonePicker, StoneTargetSelecter
-from game_actors_and_handlers.search_buff import GameBuffDigger
+from game_actors_and_handlers.search_buff import GameBuffDigger, GameBuffDiggerInfo
 from game_actors_and_handlers.workers import GainMaterialEventHandler
 from game_actors_and_handlers.pickups import Pickuper, AddPickupHandler,BoxPickuper,MonsterPit
 from game_actors_and_handlers.location import ChangeLocationBot, GameStateEventHandler
 from game_actors_and_handlers.friends import VisitingUsers
 from game_state.brains import PlayerBrains
 from game_actors_and_handlers.wand import MagicWand
-from game_actors_and_handlers.harvest_buff import GameBuffHarvest
+from game_actors_and_handlers.harvest_buff import GameBuffHarvest, GameBuffHarvestInfo
 from game_actors_and_handlers.friend_dig import FriendDigger
 from game_actors_and_handlers.exchange_collection import ExchangeKruger, ExchangeMummy
 from game_actors_and_handlers.chop import PirateTreeCut
@@ -44,7 +44,7 @@ from game_actors_and_handlers.deletingobjects import DeletingObjects
 from game_actors_and_handlers.pirate_put import PiratePut
 from game_actors_and_handlers.bolt_gift import BoltGift
 from game_actors_and_handlers.exchange_super import ExchangeCollections
-from game_actors_and_handlers.buff_fix_cook import GameBuffFixCook
+from game_actors_and_handlers.buff_fix_cook import GameBuffFixCook, GameBuffFixCookInfo
 from game_actors_and_handlers.emerald_exchange import Emeraldic
 from game_actors_and_handlers.tent_circus import BowReceiverBot
 import socket
@@ -578,7 +578,6 @@ class Game():
                    'SellBot':{'sell_item':self.__selected_sell,'send_user':self.__selected_send},
                    'ChangeLocationBot':self.__selected_loc_setting,
                   }
-        logger.info(u'!!!create_all_actors Старт...')
         events_sender = self.__game_events_sender
         timer = self._get_timer()
         item_reader = self.__itemReader
@@ -595,8 +594,11 @@ class Game():
             MonsterPit,          #Закапывание чуда
             #VisitingUsers,      # Посещение друзей
             #GameBuffHarvest,     #Приём супер урожая
+            GameBuffHarvestInfo,   #Информер супер урожая
             #GameBuffDigger,     # Приём супер-поиск
+            GameBuffDiggerInfo,  # Информер мупер поиска
             #GameBuffFixCook,    # Прием минутки на день
+            GameBuffFixCookInfo,  # Информер минутки
             WoodPicker,         # Сбор дерева
             StonePicker,        # Сбор камня
             BrewPicker,         # Сбор сваренного
@@ -614,7 +616,7 @@ class Game():
             #PiratePut,         #Выставление любого барахла со склада
             #RouletteRoller,     # Кручение рулеток
             #FrutRouletteRoller, # Кручение фруктовых рулеток
-            #UseEggItemBot,      # Бить яйца ;)
+            UseEggItemBot,      # Бить яйца ;)
             #MagicWand,          # Добыча ресурсов палочками
             #ExchangeKruger,      # Создаем коллекцию фреди в изумрудной мельнице
             #ExchangeMummy,       # Создаем коллекцию мумии в изумрдуном маяке
@@ -636,7 +638,6 @@ class Game():
         ]
         self.__actors = []
         for actor_class in actor_classes:
-            logger.info(u'!!!actor_class Старт...')
             self.__actors.append(
                 actor_class(item_reader, game_state, events_sender, timer,
                             options))
@@ -647,7 +648,6 @@ class Game():
         '''
         #all_time=[]
         for actor in self.__actors:
-            #logger.info(u'!!!perform_all_actions Старт...')
             #time_one=time.time()
             actor.perform_action()
             #time_two=time.time()

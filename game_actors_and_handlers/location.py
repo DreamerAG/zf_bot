@@ -16,7 +16,6 @@ class ChangeLocationBot(BaseActor):
     '''
 
     def perform_action(self):
-        logger.info(u'!!!ChangeLocationBot Старт...')
         loc_setting = self._get_options()
         self.__init_visit_queue(loc_setting)
         next_loc_id = self.__get_next_loc_id(loc_setting)

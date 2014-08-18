@@ -114,7 +114,6 @@ class AddPickupHandler(object):
 class MonsterPit(BaseActor):
 
     def perform_action(self):
-        logger.info(u'!!!MonsterPit Старт...')
         monster = self._get_game_location().get_all_objects_by_type('monsterPit')
         if (len(monster) > 0):
             if (monster[0].state == 'HAVE_PICKUP_BOX'):

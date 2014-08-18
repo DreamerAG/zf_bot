@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 class SellBot(BaseActor):
 
     def perform_action(self):
-        logger.info(u'!!!ChangeLocationBot Старт...')
         # Продажа
         sell_items = self._get_options()['sell_item']
         if sell_items<>None:

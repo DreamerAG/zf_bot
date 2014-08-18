@@ -10,7 +10,6 @@ logger = logging.getLogger(__name__)
 class StoragePut(BaseActor):
 
     def perform_action(self):
-        logger.info(u'!!!StoragePut Старт...')
         num = 50              # партиями по ... шт.
         current_loc = self._get_game_state().get_location_id()
         storage = self._get_game_state().get_state().storageGameObjects
