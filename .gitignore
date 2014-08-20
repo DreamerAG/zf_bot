@@ -3,13 +3,17 @@ __pycache__/
 *.py[cod]
 *.pyc
 settings.ini
+sig.txt
+keys.txt
+123config.xml
+
 # C extensions
 *.so
 
 # Distribution / packaging
 .Python
 env/
-bin/
+#bin/
 build/
 develop-eggs/
 dist/
