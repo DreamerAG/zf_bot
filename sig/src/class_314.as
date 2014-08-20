@@ -1,17 +1,22 @@
-package
+package 
 {
    import flash.display.Loader;
    import flash.net.URLRequest;
    import flash.events.IOErrorEvent;
    import flash.events.Event;
-
+   import flash.utils.ByteArray;
+   import flash.utils.getQualifiedClassName;
+   
    public class class_314 extends Loader
    {
-
-      public function class_314(param1:String, param2:String, param3:Function, param4:Function = null)
+      
+      public function class_314(param1:String, param2:String, param3:Function, param4:Function = null, savedSaltSWF:String = null)
       {
          super();
-         this.url = param1 + "/salt?postfix=" + param2;
+		 if (savedSaltSWF != null)
+            this.url = param1 + "/salt?postfix=" + param2;
+		 else this.url = savedSaltSWF;
+		 this.postfix = param2;
          this.completeHandler = param3;
          this.failHandler = param4;
          this.contentLoaderInfo.addEventListener(Event.COMPLETE,this.method_533);
@@ -19,23 +24,29 @@ package
          this.request = new URLRequest(param1);
          load(this.request);
       }
-
+      
       private static var var_1767:int = 3;
-
+      
       public var url:String;
-
+      
       public var completeHandler:Function;
-
+      
       private var failHandler:Function;
-
+      
       private var request:URLRequest;
-
+      
       private var var_1152:int = 0;
-
+      
       public var loaded:Boolean = false;
-
+      
       public var saltFunc:Function;
-
+	  
+	  public var bytes:ByteArray;
+	  
+	  public var actualPostfix:String;
+	  
+	  private var postfix:String;
+      
       private function method_1684(param1:IOErrorEvent) : void
       {
          if(this.var_1152 < var_1767)
@@ -55,10 +66,13 @@ package
             }
          }
       }
-
+      
       private function method_533(param1:Event) : void
       {
          var _loc2_:Object = param1.target.content;
+		 this.bytes = param1.target.bytes;
+		 this.actualPostfix = getQualifiedClassName(_loc2_).substr( -postfix.length, postfix.length);
+		 trace(this.actualPostfix);
          this.saltFunc = _loc2_.saltFunc;
          this.loaded = true;
          this.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.method_533);

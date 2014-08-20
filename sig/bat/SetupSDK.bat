@@ -3,9 +3,9 @@
 :: Path to Flex SDK
 ::set FLEX_SDK=C:\Users\NBK\AppData\Local\FlashDevelop\Apps\ascsdk\14.0.0
 For /F "Delims=" %%I In ('WHERE /R c:\users airsdk.xml') Do Set FLEX_SDK=%%~I
-echo %FLEX_SDK%
+::echo %FLEX_SDK%
 set FLEX_SDK=%FLEX_SDK:\airsdk.xml=%
-echo %FLEX_SDK%
+::echo %FLEX_SDK%
 #pause
 :validation
 if not exist "%FLEX_SDK%" goto flexsdk
