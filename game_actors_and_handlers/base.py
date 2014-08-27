@@ -33,3 +33,6 @@ class BaseActor(object):
 
     def _get_player_brains(self):
         return self._get_game_state().get_brains()
+
+    def test(self):
+        return 'test'
