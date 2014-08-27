@@ -104,7 +104,7 @@ class Factory():
             f.write(" ".join([authKey,str(requestId),sessionKey]))
         cwd = os.getcwd()
         os.chdir("sig")
-        subprocess.call(["Run.bat"])
+        subprocess.call(["Run.cmd"])
         os.chdir(cwd)
         with open("sig\\bin\\sig.txt",'rt') as f:
             data=f.read()
