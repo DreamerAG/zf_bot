@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?> 
 <application xmlns="http://ns.adobe.com/air/application/14.0">
 	
-	<id>123</id> 
+	<id>siggen</id> 
 	<versionNumber>1.0</versionNumber> 
-	<filename>123</filename> 
+	<filename>siggen</filename> 
 	
-	<name>123</name> 
+	<name>siggen</name> 
 	<description></description> 
 	<copyright></copyright> 
 	
 	<initialWindow> 
-		<title>123</title> 
-		<content>123.swf</content> 
+		<title>siggen</title> 
+		<content>siggen.swf</content> 
 		<systemChrome>standard</systemChrome> 
 		<transparent>false</transparent> 
 		<visible>false</visible> 
